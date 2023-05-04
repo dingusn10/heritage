@@ -1,8 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import Dropdown from '../components/Dropdown.jsx'
-import Square from '../components/Square.astro'
+import Dropdown from '../components/Dropdown.jsx';
+import Square from '../components/Square.astro';
+let id = import.meta.env.PUBLIC_PCO_ID
+let key = import.meta.env.PUBLIC_PCO_KEY
+let authString = '${id}:${key}'
+let headers = new Headers();
+headers.set('Authorization', 'Basic' + btoa(authString))
+const response = await fetch('https://api.planningcenteronline.com/people/v2/people?where[membership]=elder', {method: 'GET', headers: headers})
+const elders = await response.json();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -36,6 +43,12 @@ import Square from '../components/Square.astro'
 				title="Community"
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
+		</ul>
+		<ul>
+			{elders.results.map((elders: { data: { attributes: { name: unknown; }; }; }) =>
+			<li>
+				<p>{elders.data.attributes.name}</p>
+			</li>)}
 		</ul>
 	</main>
 </Layout>

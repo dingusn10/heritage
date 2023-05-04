@@ -4,7 +4,6 @@ import vercel from "@astrojs/vercel/serverless";
 import image from "@astrojs/image";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
-
 import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
