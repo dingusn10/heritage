@@ -45,10 +45,7 @@ const elders = await response.json();
 			/>
 		</ul>
 		<ul>
-			{elders.results.map((elders: { data: { attributes: { name: unknown; }; }; }) =>
-			<li>
-				<p>{elders.data.attributes.name}</p>
-			</li>)}
+			{JSON.stringify(elders.results)}
 		</ul>
 	</main>
 </Layout>
