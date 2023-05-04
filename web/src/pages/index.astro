@@ -42,9 +42,10 @@ const elders = await response.json();
 			/>
 		</ul>
 		<ul>
-			{elders.results.map((elders: { data: { attributes: { name: unknown; }; }; }) => 
+			{elders.results.map((elders: { data: { attributes: { name: unknown; email: unknown; }; }; }) => 
 			<li>
-				<p>{elders.data.attributes.name}</p>
+				<p>{elders.data.attributes.name}</p><br />
+				<a>{elders.data.attributes.email}</a>
 			</li>)
 			};
 		</ul>
