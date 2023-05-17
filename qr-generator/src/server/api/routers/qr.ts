@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
+import { inferAsyncReturnType } from "@trpc/server";
 
 import {
   createTRPCRouter,
@@ -25,5 +27,12 @@ export const exampleRouter = createTRPCRouter({
 });
 
 export const qrRouter = createTRPCRouter({
-  
+  generate: publicProcedure
+    .input(z.object({ path: z.string(), target: z.string(), description: z.string() }))
+    .mutation(async ({input: {path, target, description}, ctx }) => {
+      const qrCode = await ctx.prisma.qrCode.create({
+        data: { path, target, description }
+      });
+      return qrCode;
+    }),
 })
